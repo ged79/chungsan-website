@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2c5aa0">
+    <title>청산노인복지센터</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon-192.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        
+        .header { background: linear-gradient(135deg, #2c5aa0 0%, #4285f4 100%); color: white; padding: 1rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { font-size: 2rem; font-weight: bold; }
+        .nav-menu { display: flex; list-style: none; gap: 2rem; }
+        .nav-menu a { color: white; text-decoration: none; font-size: 1.1rem; font-weight: 500; }
+        .phone { font-size: 1.2rem; font-weight: bold; }
+        
+        .hero-section { background: linear-gradient(rgba(44, 90, 160, 0.8), rgba(66, 133, 244, 0.8)); color: white; text-align: center; padding: 4rem 2rem; }
+        .hero-content h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .hero-content p { font-size: 1.5rem; margin-bottom: 2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+        
+        .app-section { background: #fff; padding: 3rem 2rem; text-align: center; border-radius: 20px; margin: -2rem auto 3rem; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .app-section h2 { color: #2c5aa0; font-size: 2.2rem; margin-bottom: 1rem; }
+        .app-section p { font-size: 1.2rem; color: #666; margin-bottom: 2rem; }
+        
+        .install-btn { background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 1.2rem 3rem; font-size: 1.4rem; font-weight: bold; border: none; border-radius: 50px; cursor: pointer; margin: 0.5rem; display: none; }
+        .install-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3); }
+        .manual-btn { background: linear-gradient(135deg, #FF6B6B 0%, #ee5a52 100%); color: white; padding: 1.2rem 3rem; font-size: 1.4rem; font-weight: bold; border: none; border-radius: 50px; cursor: pointer; margin: 0.5rem; }
+        
+        .features { display: flex; justify-content: space-around; margin-top: 2rem; flex-wrap: wrap; gap: 1rem; }
+        .feature { background: #f8f9fa; padding: 1rem; border-radius: 10px; flex: 1; min-width: 200px; border-left: 4px solid #4285f4; }
+        .feature h4 { color: #2c5aa0; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        
+        .services-section { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+        .services-title { text-align: center; font-size: 2.5rem; color: #2c5aa0; margin-bottom: 3rem; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+        .service-card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); text-align: center; }
+        .service-icon { font-size: 3rem; color: #4285f4; margin-bottom: 1rem; }
+        .service-card h3 { color: #2c5aa0; font-size: 1.5rem; margin-bottom: 1rem; }
+        
+        .contact-section { background: #2c5aa0; color: white; padding: 3rem 2rem; text-align: center; }
+        .contact-content { max-width: 800px; margin: 0 auto; }
+        .contact-section h2 { font-size: 2.2rem; margin-bottom: 2rem; }
+        .contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .contact-item { background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; }
+        
+        .footer { background: #1a365d; color: white; text-align: center; padding: 2rem; }
+        
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+        .modal-content { background: white; margin: 10% auto; padding: 2rem; width: 90%; max-width: 600px; border-radius: 10px; }
+        .close { color: #aaa; float: right; font-size: 2rem; font-weight: bold; cursor: pointer; }
+        
+        @media (max-width: 768px) {
+            .nav-menu { flex-direction: column; gap: 1rem; }
+            .hero-content h1 { font-size: 2rem; }
+            .app-section { margin: -1rem 1rem 2rem; }
+            .install-btn, .manual-btn { width: 100%; margin: 0.5rem 0; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">청산노인복지센터</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">홈</a></li>
+                    <li><a href="#services">서비스</a></li>
+                    <li><a href="#app">앱 다운로드</a></li>
+                    <li><a href="#contact">연락처</a></li>
+                </ul>
+            </nav>
+            <div class="phone">📞 010-2500-1390</div>
+        </div>
+    </header>
+
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <h1>어르신들의 행복한 일상을 함께합니다</h1>
+            <p>전문적이고 정성스러운 방문요양 · 방문목욕 서비스</p>
+        </div>
+    </section>
+
+    <section class="app-section" id="app">
+        <h2>🏠 청산케어 앱 출시!</h2>
+        <p>언제 어디서나 간편하게 서비스를 신청하고 관리하세요</p>
+        
+        <button id="installBtn" class="install-btn">📱 앱 설치하기</button>
+        <button id="manualBtn" class="manual-btn">📖 설치방법 보기</button>
+        
+        <div class="features">
+            <div class="feature">
+                <h4>📅 서비스 예약</h4>
+                <p>방문요양/목욕 일정을 쉽게 예약</p>
+            </div>
+            <div class="feature">
+                <h4>💬 실시간 소통</h4>
+                <p>요양보호사와 직접 연락</p>
+            </div>
+            <div class="feature">
+                <h4>📊 서비스 관리</h4>
+                <p>이용 내역과 일정 확인</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="services">
+        <h2 class="services-title">우리의 서비스</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3>방문요양</h3>
+                <p>어르신의 집에서 일상생활을 도와드리는 전문 요양 서비스를 제공합니다.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🛁</div>
+                <h3>방문목욕</h3>
+                <p>이동이 어려운 어르신을 위한 전문적인 방문목욕 서비스를 제공합니다.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💼</div>
+                <h3>요양보호사 채용</h3>
+                <p>경력과 열정을 갖춘 요양보호사 선생님들을 모시고 있습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="contact-content">
+            <h2>📞 연락처 & 상담</h2>
+            <p>언제든지 편안하게 연락 주세요. 친절하게 상담해드립니다.</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>📱 대표번호</h4>
+                    <p>010-2500-1390</p>
+                </div>
+                <div class="contact-item">
+                    <h4>🕐 운영시간</h4>
+                    <p>평일 09:00 - 18:00<br>주말 및 공휴일 상담 가능</p>
+                </div>
+                <div class="contact-item">
+                    <h4>📍 서비스 지역</h4>
+                    <p>상담 후 안내<br>방문 서비스 제공</p>
+                </div>
+                <div class="contact-item">
+                    <h4>💰 서비스 비용</h4>
+                    <p>장기요양보험 적용<br>개인부담금 안내</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 청산노인복지센터. 모든 권리 보유.</p>
+        <p>어르신들의 건강하고 행복한 노후를 위해 최선을 다하겠습니다.</p>
+    </footer>
+
+    <div id="installModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>📱 앱 설치 방법</h2>
+            <div id="installInstructions">
+                <h3>🤖 안드로이드</h3>
+                <ol>
+                    <li>Chrome 브라우저에서 이 사이트 방문</li>
+                    <li>주소창 옆 "설치" 버튼 클릭</li>
+                    <li>"설치" 확인 클릭</li>
+                </ol>
+                <h3>🍎 아이폰</h3>
+                <ol>
+                    <li>Safari에서 이 사이트 방문</li>
+                    <li>하단 공유 버튼 (□↗) 클릭</li>
+                    <li>"홈 화면에 추가" 클릭</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // PWA 설치 기능
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+        const manualBtn = document.getElementById('manualBtn');
+        const modal = document.getElementById('installModal');
+        const span = document.getElementsByClassName('close')[0];
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'inline-block';
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                installBtn.style.display = 'none';
+            }
+        });
+
+        manualBtn.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+
+        span.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Service Worker 등록
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>

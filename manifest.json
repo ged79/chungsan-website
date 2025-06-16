@@ -1,0 +1,42 @@
+{
+  "name": "청산케어",
+  "short_name": "청산케어",
+  "description": "청산노인복지센터 방문요양 및 방문목욕 서비스 앱",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2c5aa0",
+  "orientation": "portrait-primary",
+  "categories": ["healthcare", "lifestyle"],
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "전화상담",
+      "short_name": "전화",
+      "description": "청산노인복지센터에 바로 전화하기",
+      "url": "tel:010-2500-1390",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "서비스 안내",
+      "short_name": "서비스",
+      "description": "방문요양 및 방문목욕 서비스 안내",
+      "url": "./#services",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
